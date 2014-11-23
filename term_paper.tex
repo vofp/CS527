@@ -1,0 +1,95 @@
+% term_paper.tex
+
+% preamble
+\documentclass[10pt,letterpaper,notitlepage,draft]{article}
+
+%\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{latexsym}
+\usepackage{eufrak}
+\usepackage{eucal}
+\usepackage{amsthm}
+\usepackage{array}
+\usepackage[final]{listings}
+\usepackage{tikz}
+
+% define theorems
+\theoremstyle{definition}
+\newtheorem{my_thm}{Theorem}
+\newtheorem{my_prp}{Proposition}
+\newtheorem{my_cor}{Corollary}
+\newtheorem{my_lmm}{Lemma}
+\newtheorem{my_clm}{Claim}
+
+% make q.e.d. symbol black square
+\renewcommand\qedsymbol{
+    \ensuremath{\blacksquare}
+}
+
+% math operators
+\DeclareMathOperator\opt{opt}
+
+% listings settings
+\lstset{
+	basicstyle=\ttfamily,
+	numbers=left,
+	numberstyle=\small,
+%	showspaces=true,
+%	showtabs=true,
+	mathescape=true,
+	frame=single
+}
+
+% my title is a command for title and author
+% #1 title
+% #2 author
+%\newcommand\mytitle[2]{
+%    \parbox{0.9\textwidth}{
+%        \centering\bfseries\large #1\\
+%        By #2\vspace{\baselineskip}
+%    }
+%}
+
+\setlength\extrarowheight{2pt} % increase height of rows
+
+\vfuzz2pt % allow overflow by 2 points
+\hfuzz2pt % allow overflow by 2 points
+
+\pagestyle{empty}
+
+\title{CS 527 Fall 2014\\Term Paper}
+\author{Spencer Hubbard} % TODO: add other author's names on new line
+\date{} % TODO: change date to actual due date
+
+\begin{document}
+
+% front matter
+\maketitle
+
+% TODO: write abstract
+%\begin{abstract}
+%\end{abstract}
+
+% main matter
+\section{Introduction}
+For each $i \in \lbrace 1, \ldots, n\rbrace$, let $x_i$ be a symbol and let $p_i$ be the probability associated with $x_i$. Let $q_i = \sum_{j=1}^{i-1} p_j + p_i / 2$ and let $\ell_i = \lceil\log 1 / p_i \rceil + 1$. Now, let $c_i$ be the first $\ell_i$ bits in the binary expansion of the number $q_i$. Shannon-Fano-Elias code uses $c_i$ as the codeword for $x_i$. It can be shown that the length of the codewords satisfy Kraft's inequality, i.e., $\sum_{i = 1}^n 2^{-\ell_i} \le 1$, which means that the code is uniquely decodable. It can also be shown that the code is a prefix code. Note that we do not assume that the symbols are indexed by decreasing probability. When the symbols are indexed by decreasing probability, this is just Shannon-Fano code.
+
+Suppose that Alice wants to send a secret message to Bob but their adversary Eve---the eavesdropper---is allowed to intercept and attempt to read any message that Alice sends Bob. Suppose also that Alice, Bob, and Eve all know the set of symbols and their associated probabilities. Notice that for a fixed set of $n$ symbols and associated probabilities, there are $n!$ Shannon-Fano-Elias codes corresponding to the $n!$ permutations of the indices $\lbrace 1, \dots, n\rbrace$. This means if Alice and Bob can agree upon a particular permutation without Eve knowing, then Alice can use Shannon-Fano-Elias code to send a message to Bob with only a $1/n!$ chance of Eve successfully reading the message.
+
+% TODO: write section
+\section{Improved Shannon-Fano-Elias Coding}
+
+% TODO: write section
+\section{Finding the Codeword Set Used for Encoding}
+
+% TODO: write section
+\section{Conclusion}
+
+% back matter
+%\nocite{*}
+%\bibliographystyle{amsplain}
+%\bibliography{reference}
+
+\end{document}
