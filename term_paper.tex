@@ -33,13 +33,13 @@
 
 % listings settings
 \lstset{
-	basicstyle=\ttfamily,
-	numbers=left,
-	numberstyle=\small,
-%	showspaces=true,
-%	showtabs=true,
-	mathescape=true,
-	frame=single
+    basicstyle=\ttfamily,
+    numbers=left,
+    numberstyle=\small,
+%   showspaces=true,
+%   showtabs=true,
+    mathescape=true,
+    frame=single
 }
 
 % my title is a command for title and author
@@ -74,35 +74,55 @@
 
 % main matter
 \section{Introduction}
-For each $i \in \lbrace 1, \ldots, n\rbrace$, let $x_i$ be a symbol and let $p_i$ be the probability associated with $x_i$. Let $q_i = \sum_{j=1}^{i-1} p_j + p_i / 2$ and let $\ell_i = \lceil\log 1 / p_i \rceil + 1$. Now, let $c_i$ be the first $\ell_i$ bits in the binary expansion of the number $q_i$. Shannon-Fano-Elias code uses $c_i$ as the codeword for $x_i$. It can be shown that the length of the codewords satisfy Kraft's inequality, i.e., $\sum_{i = 1}^n 2^{-\ell_i} \le 1$, which means that the code is uniquely decodable. It can also be shown that the code is a prefix code. Note that we do not assume that the symbols are indexed by decreasing probability. When the symbols are indexed by decreasing probability, this is just Shannon-Fano code.
+For each $i \in \lbrace 1, \ldots, n\rbrace$, let $x_i$ be a symbol and let $p_i$ be the probability associated with $x_i$. 
+Let $q_i = \sum_{j=1}^{i-1} p_j + p_i / 2$ and let $\ell_i = \lceil\log 1 / p_i \rceil + 1$. 
+Now, let $c_i$ be the first $\ell_i$ bits in the binary expansion of the number $q_i$. 
+Shannon-Fano-Elias code uses $c_i$ as the codeword for $x_i$. 
+It can be shown that the length of the codewords satisfy Kraft's inequality, i.e., $\sum_{i = 1}^n 2^{-\ell_i} \le 1$, which means that the code is uniquely decodable. 
+It can also be shown that the code is a prefix code. 
+Note that we do not assume that the symbols are indexed by decreasing probability. 
+When the symbols are indexed by decreasing probability, this is just Shannon-Fano code.
 
-Suppose that Alice wants to send a secret message to Bob but their adversary Eve---the eavesdropper---is allowed to intercept and attempt to read any message that Alice sends Bob. Suppose also that Alice, Bob, and Eve all know the set of symbols and their associated probabilities. Notice that for a fixed set of $n$ symbols and associated probabilities, there are $n!$ Shannon-Fano-Elias codes corresponding to the $n!$ permutations of the indices $\lbrace 1, \dots, n\rbrace$. This means if Alice and Bob can agree upon a particular permutation without Eve knowing, then Alice can use Shannon-Fano-Elias code to send a message to Bob with only a $1/n!$ chance of Eve successfully reading the message.
+Suppose that Alice wants to send a secret message to Bob but their adversary Eve---the eavesdropper---is allowed to intercept and attempt to read any message that Alice sends Bob. 
+Suppose also that Alice, Bob, and Eve all know the set of symbols and their associated probabilities. 
+Notice that for a fixed set of $n$ symbols and associated probabilities, there are $n!$ Shannon-Fano-Elias codes corresponding to the $n!$ permutations of the indices $\lbrace 1, \dots, n\rbrace$. 
+This means if Alice and Bob can agree upon a particular permutation without Eve knowing, then Alice can use Shannon-Fano-Elias code to send a message to Bob with only a $1/n!$ chance of Eve successfully reading the message.
 
 % TODO: write section
 \section{Improved Shannon-Fano-Elias Coding}
 
+\subsection{"Better" PMF for encoding}
+This improvement to Shannon-Fano-Elias code aims to change the PMF used for the encoding. Since Huffman coding is more optimial, we will use the length of each symbol to generate a new PMF. 
+
 \subsection{Codeword Truncation}
 Input: Shannon-Fano-Elias codeword set codeword(xi) for 1<=i<=n.
 Output: codeword(xi) with lower expected length.
-	for 1<=i<=n do
-		c(xi)<- codeword(xi)
-		while codeword(xi-1),c(xi) and codeword(xi+1) are mutually prefix-free do
-			codeword(xi) <- c(xi)
-			c(xi) <- removing the rightmost bit of the codeword(xi)
-		end while
-	end for
+    for 1<=i<=n do
+        c(xi)<- codeword(xi)
+        while codeword(xi-1),c(xi) and codeword(xi+1) are mutually prefix-free do
+            codeword(xi) <- c(xi)
+            c(xi) <- removing the rightmost bit of the codeword(xi)
+        end while
+    end for
 
 In this algorithm, each codeword has the rightmost bits are truncated while it and its preceding and succeeding codewords are mutually prefix-free. Since the algorithm removes bits from the codeword, it will reduce the average code length and therefore optimize the code. This works because the closer codes are, the more similar they are due to the codeword being based on the running probability. Therefore, the codeword does not have to be compared to every other codeword and only the ones immediately before and after it. 
 
 Below we have a code with 4 codewords:
 
-\begin{table}{ccccc}
-Values & P(X) & F(X) & Codeword \\
+\begin{tabular}{|c|c|c|c|}
+\hline
+Values & P(X) & F(X) & Codeword \\ 
+\hline 
+\hline
 D & 1/4 & 1/8 & 001 \\
-C &	 1/6 &	 1/3 &	0101 \\
-B &	 1/4 &	13/24 &	100 \\
-A &	 1/3 &	 5/6 &	110 \\
-\end{table}
+\hline
+C & 1/6 & 1/3 & 0101 \\
+\hline
+B & 1/4 & 13/24 & 100 \\
+\hline
+A & 1/3 & 5/6 & 110 \\
+\hline
+\end{tabular}
 
 Using the algorithm in order we have
 001 compared to 0101.  
@@ -130,15 +150,25 @@ Deleting one more value would result in 1, which is a prefix of 10, therefore th
 The algorithm ends because our alphabet has been exhausted.
 
 Our resulting code is 
-\begin{table}{ccccc}
+\begin{tabular}{|c|c|c|c|}
+\hline
 Values & P(X) & F(X) & Codeword \\
+\hline
+\hline
 D & 1/4 & 1/8 & 00 \\
-C &	 1/6 &	 1/3 &	01 \\
-B &	 1/4 &	13/24 &	10 \\
-A &	 1/3 &	 5/6 &	11 \\
-\end{table}
+\hline
+C & 1/6 & 1/3 & 01 \\
+\hline
+B & 1/4 & 13/24 & 10 \\
+\hline
+A & 1/3 & 5/6 & 11 \\
+\hline
+\end{tabular}
+
 
 Here we see a significantly reduced code.  The average length has been reduced to 2, as opposed to the 3.2 that it was previously.  Not only is this code significantly reduced in this case, it is also optimal.  Thus, in certain cases, this truncation method can result in an optimal Huffman code.
+
+
 % TODO: write section
 \section{Finding the Codeword Set Used for Encoding}
 
