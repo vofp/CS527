@@ -86,6 +86,9 @@ Suppose also that Alice, Bob, and Eve all know the set of symbols and their asso
 Notice that for a fixed set of $n$ symbols and associated probabilities, there are $n!$ Shannon-Fano-Elias codes corresponding to the $n!$ permutations of the indices $\lbrace 1, \dots, n\rbrace$. 
 This means if Alice and Bob can agree upon a particular permutation without Eve knowing, then Alice can use Shannon-Fano-Elias code to send a message to Bob and Eve must potentially check $n!$ permutations before successfully reading the message.
 
+\section{Huffman Code vs Shannon Code}
+% The downsides of huffman codes and why it can't be used for encryption
+
 \section{Improved Shannon-Fano-Elias Coding}
 
 \subsection{"Better" PMF for encoding}
@@ -95,7 +98,7 @@ To decrease the average length of the code, we will replace the true probabiliti
 
 For each $i \in \lbrace 1, \ldots, n\rbrace$, let $x_i$ and $p_i$ be defined as before.
 Let $\ell_i$ be the length of the Huffman codeword for the symbol $x_i$ with probability $p_i$ and let $L$ be the average length of this Huffman code, i.e., let $L = \sum_{i=1}^n p_i \ell_i$.
-Now, let $p_i^\prime = 2^{-\ell_i}$ be the temporary probability of the symbol $x_i$ and let $\ell_i^\prime$ be the length of the Shannon-Fano-Elias codeword for the symbol $x_i$ with the temporary probability $p_i^\prime$, i.e., let $\ell_i^\prime =  \lceil\log 1 / p_i^\prime \rceil + 1$.
+Now, let $p_i^\prime = 2^{-\ell_i}$ be the temporary probability of the symbol $x_i$ and let $\ell_i^\prime$ be the length of the Shannon-Fano-Elias codeword for the symbol $x_i$ with the temporary probability $p_i^\prime$, i.e., let $\ell_i^\prime =  \lceil\log_2 1 / p_i^\prime \rceil + 1$.
 Also, let $L^\prime$ be the average length of this Shannon-Fano-Elias code with respect to the true probabilities, i.e., let $L^\prime = \sum_{i=1}^n p_i \ell_i^\prime$.
 Notice that $\ell_i^\prime = \ell_i + 1$.
 This means
@@ -109,9 +112,11 @@ L^\prime
 \end{align*}
 which means the average length of this Shannon-Fano-Elias code is within one of optimal.
 
+% Another reason to use the better PMF 
+
 \subsection{Codeword Truncation}
 
-\begin{lstlisting}
+\begin{lstlisting}[breaklines]
 Input: Shannon-Fano-Elias codeword set codeword(xi) for 1<=i<=n.
 Output: codeword(xi) with lower expected length.
     for 1<=i<=n do
