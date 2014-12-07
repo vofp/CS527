@@ -245,7 +245,7 @@ Given the received encoded sequence \ref{c1} and a candidate codeword set {11110
 \caption{Received encoded sequence}\label{c1}
 \end{figure}
 
-The codeword 11110 doesn't appear in the sequence \ref{c1}, so we have to search for the codeword 110.
+The codeword 11110 doesn't appear in the sequence \ref{c1}, so we have to search for the codeword 110. The bold numbers represent the codeword 110 that were found, and the underlined numbers are codewords that are found before the codeword 110.
 
 \begin{figure}[h!]
 \begin{center}
@@ -275,6 +275,8 @@ Since the sequence is not empty, after we searched using on the codewords.
 \subsection{Example 2}
 
 Once again, we are still using sequence \ref{c1}. 
+This time we are checking if the codeword set {00001,010,10}.
+Fist we will search for the longest codeword in the set in the sequence.
 
 \begin{figure}[h!]
 \begin{center}
@@ -283,6 +285,10 @@ Once again, we are still using sequence \ref{c1}.
 \caption{Searching for 00001 in sequence}\label{c4}
 \end{figure}
 
+We found 4 occurrences of the codeword 00001, and they each have another codeword to the left of it. 
+Therefore we will delete all of them. 
+We will continue searching though the new sequence for the next codeword 010.
+
 \begin{figure}[h!]
 \begin{center}
 {\bf 0101010\underline{10}\underline{010}010\underline{10}01010\underline{10}01010}
@@ -290,12 +296,18 @@ Once again, we are still using sequence \ref{c1}.
 \caption{Searching for 010 in sequence after removing all 00001}\label{c5}
 \end{figure}
 
+We found 12 occurrences of the codeword 010, but not all of them had other codewords before it. 
+So we only deleted 4 occurrences.
+We will search for the last codeword 10.
+
 \begin{figure}[h!]
 \begin{center}
 {\bf \underline{101010101010}10}
 \end{center}
 \caption{Searching for 10 in sequence after removing all 010}\label{c6}
 \end{figure}
+
+
 
 
 % TODO: write section
