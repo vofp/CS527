@@ -164,6 +164,10 @@ A & 1/4 & 7/8 & 111 \\
 
 \subsection{Codeword Truncation}
 
+In Figure~\ref{f1}, each codeword has the rightmost bits are truncated while it and its preceding and succeeding codewords are mutually prefix-free. Since the algorithm removes bits from the codeword, it will reduce the average code length and therefore optimize the code. This works because the closer codes are, the more similar they are due to the codeword being based on the running probability. Therefore, the codeword does not have to be compared to every other codeword and only the ones immediately before and after it.
+
+ \begin{figure}[h]
+\caption{Figure text here.}\label{f1}
 \begin{lstlisting}[breaklines]
 Input: Shannon-Fano-Elias codeword set codeword(xi) for 1<=i<=n.
 Output: codeword(xi) with lower expected length.
@@ -175,8 +179,7 @@ Output: codeword(xi) with lower expected length.
         end while
     end for
 \end{lstlisting}
-
-In this algorithm, each codeword has the rightmost bits are truncated while it and its preceding and succeeding codewords are mutually prefix-free. Since the algorithm removes bits from the codeword, it will reduce the average code length and therefore optimize the code. This works because the closer codes are, the more similar they are due to the codeword being based on the running probability. Therefore, the codeword does not have to be compared to every other codeword and only the ones immediately before and after it. 
+\end{figure} 
 
 Using the algorithm in order on Table~\ref{t1}, we have 
 001 compared to 0101.  
@@ -237,22 +240,21 @@ Another sequence can be used to make a smaller subset.
 
 \subsection{Example 1}
 
-Given the received encoded sequence \ref{c1} and a candidate codeword set {11110,110,01}. The codeword set needs to be listed in order by length.
-\begin{figure}[h!]
-\begin{center}
-0101010100100101000001000010101010010000011000001
-\end{center}
-\caption{Received encoded sequence}\label{c1}
-\end{figure}
+Given the received encoded sequence \ref{c1} and a candidate codeword set {11110,110,01}. The codeword set needs to be listed in order by length.\\[6pt]
+%\begin{figure}[h!]
+%\begin{center}
+\makebox[\linewidth][c]{Received encoded sequence: 0101010100100101000001000010101010010000011000001}\\
+%\end{center}
+%\makebox[\linewidth][c]{Received encoded sequence}\\%\label{c1}
+%\end{figure}
 
-The codeword 11110 doesn't appear in the sequence \ref{c1}, so we have to search for the codeword 110.
-
-\begin{figure}[h!]
-\begin{center}
-01010101001001010000010000101010100100000{\bf 110}00001
-\end{center}
-\caption{Searching for 110 in sequence }\label{c2}
-\end{figure}
+The codeword 11110 doesn't appear in the sequence \ref{c1}, so we have to search for the codeword 110.\\[6pt]
+%\begin{figure}[h!]
+%\begin{center}
+\makebox[\linewidth][c]{01010101001001010000010000101010100100000{\bf 110}00001}\\
+%\end{center}
+\makebox[\linewidth][c]{Searching for 110 in sequence }\\%\label{c2}
+%\end{figure}
 
 For every codeword, we will delete it from the sequence \ref{c1} if any other codewords (that we haven't checked) appear before it. But codewords {110,01} were not found before the codeword 110, so the current sequence is still unchanged from sequence \ref{c1}. Now we search for the codeword 01. 
 
