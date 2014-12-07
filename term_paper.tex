@@ -88,6 +88,12 @@ This means if Alice and Bob can agree upon a particular permutation without Eve 
 
 \section{Huffman Code vs Shannon Code}
 % The downsides of huffman codes and why it can't be used for encryption
+Huffman code is an optimal prefix code and could be used for data compression, but it is not very good for encryption. 
+Since the probability of each symbol is very important the encryption, knowing fixed set of $n$ symbols, associated probabilities, and the algorithm used will easily yield the correct encoding. 
+Shannon-Fano-Elias Coding is extremely sub-optimal, but great for encryption.
+Even with the knowledge of the fixed set of $n$ symbols, associated probabilities, and the algorithm used, there are still $n!$ different encodings. 
+Shannon-Fano-Elias Coding depends greatly on the order of the the symbols as well as the probabilities.
+
 
 \section{Improved Shannon-Fano-Elias Coding}
 
@@ -220,6 +226,9 @@ Here we see a significantly reduced code.  The average length has been reduced t
 
 % TODO: write section
 \section{Finding the Codeword Set Used for Encoding}
+Cryptanalysis is very hard for Shannon-Fano-Elias Code because there are $n!$ different encodings.
+
+
 
 % TODO: write section
 \section{Conclusion}
