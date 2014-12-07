@@ -164,6 +164,10 @@ A & 1/4 & 7/8 & 111 \\
 
 \subsection{Codeword Truncation}
 
+In Figure~\ref{f1}, each codeword has the rightmost bits are truncated while it and its preceding and succeeding codewords are mutually prefix-free. Since the algorithm removes bits from the codeword, it will reduce the average code length and therefore optimize the code. This works because the closer codes are, the more similar they are due to the codeword being based on the running probability. Therefore, the codeword does not have to be compared to every other codeword and only the ones immediately before and after it.
+
+ \begin{figure}[h]
+\caption{Figure text here.}\label{f1}
 \begin{lstlisting}[breaklines]
 Input: Shannon-Fano-Elias codeword set codeword(xi) for 1<=i<=n.
 Output: codeword(xi) with lower expected length.
@@ -175,33 +179,32 @@ Output: codeword(xi) with lower expected length.
         end while
     end for
 \end{lstlisting}
-
-In this algorithm, each codeword has the rightmost bits are truncated while it and its preceding and succeeding codewords are mutually prefix-free. Since the algorithm removes bits from the codeword, it will reduce the average code length and therefore optimize the code. This works because the closer codes are, the more similar they are due to the codeword being based on the running probability. Therefore, the codeword does not have to be compared to every other codeword and only the ones immediately before and after it. 
+\end{figure} 
 
 Using the algorithm in order on Table~\ref{t1}, we have 
 001 compared to 0101.  
-These numbers are mutually prefix-free and the rightmost value and be deleted.  
+These codewords are mutually prefix-free and the rightmost bit and be deleted.  
 D is now 00.  
-Removing one more would result in 0, which is not prefix free and the algorithm continues to the next value.
+Removing one more would result in 0, which is a prefix of 0101 and the algorithm continues to the next codeword.
 
 0101 is compared to 00 and 100.
-These numbers are prefix free and the rightmost value can be deleted.
+These codewords are prefix-free and the rightmost bit can be deleted.
 C is now 010.
 010 is compared to 00 and 100.
-These numbers are prefix free and the rightmost value can be deleted.
+These codewords are still prefix-free and the rightmost bit can be deleted.
 C is now 01.
-Deleting one more would result and 0 and therefore a prefix, thus the algorithm can move to the next value.
+Deleting one more would result and 0 and therefore a prefix of 00, thus the algorithm can move to the next codeword.
 
 100 is compared to 01 and 110.
-These numbers are prefix free and the rightmost value can be deleted.
+These codewords are prefix-free and the rightmost bit can be deleted.
 B is now 10.
-Deleting one more value would result in 1, which is a prefix of 110 and therefore the algorithm moves on.
+Deleting one more bit would result in 1, which is a prefix of 110 and therefore the algorithm moves on.
 
 110 is compared to 10.
-These numbers are prefix free and the rightmost value can be deleted.
+These codewords are prefix-free and the rightmost bit can be deleted.
 A is now 11.
-Deleting one more value would result in 1, which is a prefix of 10, therefore the algorithm continues.
-The algorithm ends because our alphabet has been exhausted.
+Deleting one more bit would result in 1, which is a prefix of 10, therefore the algorithm continues.
+The algorithm then ends because our codeword set has been exhausted.
 
 \begin{table}[h]
 \begin{center}
@@ -237,13 +240,10 @@ Another sequence can be used to make a smaller subset.
 
 \subsection{Example 1}
 
+<<<<<<< HEAD
 Given the received encoded sequence \ref{c1} and a candidate codeword set {11110,110,01}. The codeword set needs to be listed in order by length.
-\begin{figure}[h!]
-\begin{center}
-0101010100100101000001000010101010010000011000001
-\end{center}
-\caption{Received encoded sequence}\label{c1}
-\end{figure}
+
+\makebox[\linewidth][c]{Received encoded sequence: 0101010100100101000001000010101010010000011000001}\\
 
 The codeword 11110 doesn't appear in the sequence \ref{c1}, so we have to search for the codeword 110. The bold numbers represent the codeword 110 that were found, and the underlined numbers are codewords that are found before the codeword 110.
 
