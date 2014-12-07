@@ -73,7 +73,7 @@
 % main matter
 \section{Introduction}
 For each $i \in \lbrace 1, \ldots, n\rbrace$, let $x_i$ be a symbol and let $p_i$ be the probability associated with $x_i$. 
-Let $q_i = \sum_{j=1}^{i-1} p_j + p_i / 2$ and let $\ell_i = \lceil\log 1 / p_i \rceil + 1$. 
+Let $f_i = \sum_{j=1}^{i-1} p_j + p_i / 2$ and let $\ell_i = \lceil\log 1 / p_i \rceil + 1$. 
 Now, let $c_i$ be the first $\ell_i$ bits in the binary expansion of the number $q_i$. 
 Shannon-Fano-Elias code uses $c_i$ as the codeword for $x_i$. 
 It can be shown that the length of the codewords satisfy Kraft's inequality, i.e., $\sum_{i=1}^n 2^{-\ell_i} \le 1$, which means that the code is uniquely decodable. 
@@ -90,6 +90,27 @@ This means if Alice and Bob can agree upon a particular permutation without Eve 
 % The downsides of huffman codes and why it can't be used for encryption
 
 \section{Improved Shannon-Fano-Elias Coding}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|c|c|c|l|}
+\hline
+Symbols & $p_i$ & $f_i$ & Codeword \\ 
+\hline 
+\hline
+D & 1/4 & 1/8 & 001 \\
+\hline
+C & 1/6 & 1/3 & 0101 \\
+\hline
+B & 1/4 & 13/24 & 100 \\
+\hline
+A & 1/3 & 5/6 & 110 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Base Shannon-Fano-Elias Code}\label{t1}
+\end{table}
+
 
 \subsection{"Better" PMF for encoding}
 %This improvement to Shannon-Fano-Elias code aims to change the PMF used for the encoding. Since Huffman coding is more optimial, we will use the length of each symbol to generate a new PMF.
@@ -113,6 +134,28 @@ L^\prime
 which means the average length of this Shannon-Fano-Elias code is within one of optimal.
 
 % Another reason to use the better PMF 
+Using the the Shannon-Fano-Elias Code in Table \ref{t1}, we will generate a better PMF. First we have to generate a Huffman code of the symbols. We find out that each codeword should have length 2 and therefore each $p_i^\prime = 0.25$. We will then use $p_i^\prime$, to generate a new Shannon-Fano-Elias code. 
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|c|c|c|l|}
+\hline
+Symbols & $p_i^\prime$ & $f_i^\prime$ & Codeword \\ 
+\hline 
+\hline
+D & 1/4 & 1/8 & 001 \\
+\hline
+C & 1/4 & 3/8 & 011 \\
+\hline
+B & 1/4 & 5/8 & 101 \\
+\hline
+A & 1/4 & 7/8 & 111 \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Shannon-Fano-Elias Code using better PMF}\label{t2}
+\end{table}
+
 
 \subsection{Codeword Truncation}
 
@@ -130,29 +173,7 @@ Output: codeword(xi) with lower expected length.
 
 In this algorithm, each codeword has the rightmost bits are truncated while it and its preceding and succeeding codewords are mutually prefix-free. Since the algorithm removes bits from the codeword, it will reduce the average code length and therefore optimize the code. This works because the closer codes are, the more similar they are due to the codeword being based on the running probability. Therefore, the codeword does not have to be compared to every other codeword and only the ones immediately before and after it. 
 
-Below we have a code with 4 codewords:
-
-\begin{table}[h]
-\begin{center}
-\begin{tabular}{|c|c|c|l|}
-\hline
-Values & P(X) & F(X) & Codeword \\ 
-\hline 
-\hline
-D & 1/4 & 1/8 & 001 \\
-\hline
-C & 1/6 & 1/3 & 0101 \\
-\hline
-B & 1/4 & 13/24 & 100 \\
-\hline
-A & 1/3 & 5/6 & 110 \\
-\hline
-\end{tabular}
-\end{center}
-\caption{caption text here}\label{t1}
-\end{table}
-
-Using the algorithm in order we have
+Using the algorithm in order on Table \ref{t1}, we have 
 001 compared to 0101.  
 These numbers are mutually prefix-free and the rightmost value and be deleted.  
 D is now 00.  
@@ -180,7 +201,7 @@ The algorithm ends because our alphabet has been exhausted.
 Our resulting code is 
 \begin{tabular}{|c|c|c|c|}
 \hline
-Values & P(X) & F(X) & Codeword \\
+Symbols & $p_i$ & $f_i$ & Codeword \\
 \hline
 \hline
 D & 1/4 & 1/8 & 00 \\
