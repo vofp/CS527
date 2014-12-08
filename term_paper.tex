@@ -255,19 +255,18 @@ We will need to use this algorithm for all sets of codewords. There are $n!$ dif
 The algorithm will create a subset of sets of codewords that work on the sequence.
 Another sequence can be used to make a smaller subset.
 
-\subsection{Example 1}
-Given the received encoded sequence \ref{c1} and a candidate codeword set {11110,110,01}. The codeword set needs to be listed in order by length.\\
+\subsection{Example 1}\label{s1}
+Given the received encoded sequence and a candidate codeword set {11110,110,01}. The codeword set needs to be listed in order by length.\\
 
 \makebox[.9\linewidth][c]{Received encoded sequence: 0101010100100101000001000010101010010000011000001}\\
 
-The codeword 11110 doesn't appear in the sequence \ref{c1}, so we have to search for the codeword 110.
+The codeword 11110 doesn't appear in the received encoded sequence, so we have to search for the codeword 110. 
 The bold numbers represent the codeword 110 that were found, and the underlined numbers are codewords that are found before the codeword 110.\\
 
 \makebox[.9\linewidth][c]{Searching for 110 in sequence 01010101001001010000010000101010100100000{\bf 110}00001}\\
 
-For every codeword, we will delete it from the sequence \ref{c1} if any other codewords (that we haven't checked) appear before it.
-But codewords {110,01} were not found before the codeword 110, so the current sequence is still unchanged from sequence \ref{c1}.
-Now we search for the codeword 01.\\
+For every codeword, we will delete it from the received encoded sequence if any other codewords (that we haven't checked) appear before it. 
+But codewords {110,01} were not found before the codeword 110, so the current sequence is still unchanged from received encoded sequence. Now we search for the codeword 01. \\
 
 \makebox[.9\linewidth][c]{Searching for 01 in sequence: {\bf \underline {010101}01}0{\bf 01}0{\bf\underline{01}01}0000{\bf 01}000{\bf\underline{010101}01}0{\bf 01}0000{\bf 01}10000{\bf 01}}\\
 
@@ -278,7 +277,7 @@ After searching for all occurrences of the codeword 01, we remove the occurrence
 Since the sequence is not empty, after we searched using on the codewords.
 
 \subsection{Example 2}
-Once again, we are still using sequence \ref{c1}. 
+Once again, we are still using received encoded sequence from example 1 in Section \ref{s1}.
 This time we are checking if the codeword set {00001,010,10}.
 Fist we will search for the longest codeword in the set in the sequence.\\
 
