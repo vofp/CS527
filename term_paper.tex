@@ -181,18 +181,18 @@ A & 1/4 & 7/8 & 111 \\
 
 \subsection{Codeword Truncation}
 
-In Figure~\ref{f1}, each codeword has the rightmost bits are truncated while it and its preceding and succeeding codewords are mutually prefix-free. Since the algorithm removes bits from the codeword, it will reduce the average code length and therefore optimize the code. This works because the closer codes are, the more similar they are due to the codeword being based on the running probability. Therefore, the codeword does not have to be compared to every other codeword and only the ones immediately before and after it.
+In Figure~\ref{f1}, each codeword has the rightmost bits are truncated while it and its preceding and succeeding codewords are mutually prefix-free. Since the algorithm removes bits from the codeword, it will reduce the average code length and therefore optimize the code. This works because the closer codes are, the more similar their prefixes are due to the codeword being based on the running probability. Therefore, the codeword does not have to be compared to every other codeword and only the ones immediately before and after it.
 
  \begin{figure}[h]
 \caption{Figure text here.}\label{f1}
 \begin{lstlisting}[breaklines]
-Input: Shannon-Fano-Elias codeword set codeword(xi) for 1<=i<=n.
-Output: codeword(xi) with lower expected length.
-    for 1<=i<=n do
-        c(xi)<- codeword(xi)
-        while codeword(xi-1),c(xi) and codeword(xi+1) are mutually prefix-free do
-            codeword(xi) <- c(xi)
-            c(xi) <- removing the rightmost bit of the codeword(xi)
+Input: Shannon-Fano-Elias codeword set codeword($x_i$) for 1$\le$i$\le$n.
+Output: codeword($x_i$) with lower expected length.
+    for 1$\le$i$\le$n do
+        c($x_i$) $\leftarrow$ codeword($x_i$)
+        while codeword(xi-1),c($x_i$) and codeword($x_i+1$) are mutually prefix-free do
+            codeword($x_i$) $\leftarrow$ c($x_i$)
+            c($x_i$) $\leftarrow$ removing the rightmost bit of the codeword($x_i$)
         end while
     end for
 \end{lstlisting}
