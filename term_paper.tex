@@ -58,7 +58,24 @@
 \pagestyle{empty}
 
 \title{CS 527 Fall 2014\\Term Paper}
-\author{Spencer Hubbard} % TODO: add other author's names on new line
+\author{\small
+\small Spencer Hubbard\\
+\small Oregon State University\\
+\small Corvallis, OR 97331\\
+\small hubbarsp@onid.oregonstate.edu
+% 2nd. author
+\and
+\small William Leslie\\
+\small Oregon State University\\
+\small Corvallis, OR 97331\\
+\small lesliew@onid.oregonstate.edu
+% 3rd. author
+\and
+\small Francis Vo\\
+\small Oregon State University\\
+\small Corvallis, OR 97331\\
+\small vof@onid.oregonstate.edu
+} % TODO: add other author's names on new line
 \date{} % TODO: change date to actual due date
 
 \begin{document}
@@ -240,35 +257,21 @@ Another sequence can be used to make a smaller subset.
 
 \subsection{Example 1}
 
-<<<<<<< HEAD
-Given the received encoded sequence \ref{c1} and a candidate codeword set {11110,110,01}. The codeword set needs to be listed in order by length.
+Given the received encoded sequence \ref{c1} and a candidate codeword set {11110,110,01}. The codeword set needs to be listed in order by length.\\
 
-\makebox[\linewidth][c]{Received encoded sequence: 0101010100100101000001000010101010010000011000001}\\
+\makebox[.9\linewidth][c]{Received encoded sequence: 0101010100100101000001000010101010010000011000001}\\
 
-The codeword 11110 doesn't appear in the sequence \ref{c1}, so we have to search for the codeword 110. The bold numbers represent the codeword 110 that were found, and the underlined numbers are codewords that are found before the codeword 110.
+The codeword 11110 doesn't appear in the sequence \ref{c1}, so we have to search for the codeword 110. The bold numbers represent the codeword 110 that were found, and the underlined numbers are codewords that are found before the codeword 110.\\
 
-\begin{figure}[h!]
-\begin{center}
-01010101001001010000010000101010100100000{\bf 110}00001
-\end{center}
-\caption{Searching for 110 in sequence }\label{c2}
-\end{figure}
+\makebox[.9\linewidth][c]{Searching for 110 in sequence 01010101001001010000010000101010100100000{\bf 110}00001}\\
 
-For every codeword, we will delete it from the sequence \ref{c1} if any other codewords (that we haven't checked) appear before it. But codewords {110,01} were not found before the codeword 110, so the current sequence is still unchanged from sequence \ref{c1}. Now we search for the codeword 01. 
+For every codeword, we will delete it from the sequence \ref{c1} if any other codewords (that we haven't checked) appear before it. But codewords {110,01} were not found before the codeword 110, so the current sequence is still unchanged from sequence \ref{c1}. Now we search for the codeword 01. \\
 
-\begin{figure}[h!]
-\begin{center}
-{\bf \underline {010101}01}0{\bf 01}0{\bf\underline{01}01}0000{\bf 01}000{\bf\underline{010101}01}0{\bf 01}0000{\bf 01}10000{\bf 01}
-\end{center}
-\caption{Searching for 01 in sequence }\label{c3}
-\end{figure}
+\makebox[.9\linewidth][c]{Searching for 01 in sequence: {\bf \underline {010101}01}0{\bf 01}0{\bf\underline{01}01}0000{\bf 01}000{\bf\underline{010101}01}0{\bf 01}0000{\bf 01}10000{\bf 01}}\\
 
-\begin{figure}[h!]
-\begin{center}
-001001000001000010010000011000001
-\end{center}
-\caption{After removing 01 from sequence}\label{c3}
-\end{figure}
+After searching for all occurrences of the codeword 01, we remove the occurrences that have the codewords {01} to the left of it\\
+
+\makebox[.9\linewidth][c]{After removing 01 from sequence: 001001000001000010010000011000001}\\
 
 Since the sequence is not empty, after we searched using on the codewords.
 
@@ -276,39 +279,24 @@ Since the sequence is not empty, after we searched using on the codewords.
 
 Once again, we are still using sequence \ref{c1}. 
 This time we are checking if the codeword set {00001,010,10}.
-Fist we will search for the longest codeword in the set in the sequence.
+Fist we will search for the longest codeword in the set in the sequence.\\
 
-\begin{figure}[h!]
-\begin{center}
-01010101001001\underline{010}{\bf\underline{00001}}{\bf00001}0101010\underline{010}{\bf00001}\underline{10}{\bf00001}
-\end{center}
-\caption{Searching for 00001 in sequence}\label{c4}
-\end{figure}
+\makebox[.9\linewidth][c]{Searching for 00001 in sequence: 01010101001001\underline{010}{\bf\underline{00001}}{\bf00001}0101010\underline{010}{\bf00001}\underline{10}{\bf00001}}\\
 
-We found 4 occurrences of the codeword 00001, and they each have another codeword to the left of it. 
+
+We found 4 occurrences of the codeword 00001, and they each have another codeword from the set {00001,010,10} to the left of it. 
 Therefore we will delete all of them. 
-We will continue searching though the new sequence for the next codeword 010.
+We will continue searching though the new sequence for the next codeword 010.\\
 
-\begin{figure}[h!]
-\begin{center}
-{\bf 0101010\underline{10}\underline{010}010\underline{10}01010\underline{10}01010}
-\end{center}
-\caption{Searching for 010 in sequence after removing all 00001}\label{c5}
-\end{figure}
+\makebox[.9\linewidth][c]{Searching for 010 in sequence after removing all 00001: {\bf 0101010\underline{10}\underline{010}010\underline{10}01010\underline{10}01010}}\\
 
-We found 12 occurrences of the codeword 010, but not all of them had other codewords before it. 
+We found 12 occurrences of the codeword 010, but not all of them had other codewords from the set {010,10} before it. 
 So we only deleted 4 occurrences.
-We will search for the last codeword 10.
+We will search for the last codeword 10.\\
 
-\begin{figure}[h!]
-\begin{center}
-{\bf \underline{101010101010}10}
-\end{center}
-\caption{Searching for 10 in sequence after removing all 010}\label{c6}
-\end{figure}
+\makebox[.9\linewidth][c]{Searching for 10 in sequence after removing all 010: {\bf \underline{101010101010}10}}\\
 
-
-
+There are only codeword 10 remaining, and therefore the final sequence is empty, and the codeword set {00001,010,10} may be the set used.
 
 % TODO: write section
 \section{Conclusion}
